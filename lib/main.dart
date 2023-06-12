@@ -35,11 +35,22 @@ class MyHomePage extends StatelessWidget {
       body: Center(
         child: BlocBuilder<CounterBloc, CounterState>(
           builder: (context, state) {
-            return Text(
-              '${state.counter}',
-              style: const TextStyle(
-                fontSize: 100,
-              ),
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  '${state.counter}',
+                  style: const TextStyle(
+                    fontSize: 100,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Text('$state.error', style: const TextStyle(color: Colors.red)),
+                const SizedBox(
+                  height: 20.0,
+                ),
+              ],
             );
           },
         ),
