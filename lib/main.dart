@@ -1,4 +1,4 @@
-import 'package:counter_app_latihan/bloc/counter_bloc.dart';
+import 'package:counter_app_latihan/cubit/counter_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,8 +11,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<CounterBloc>(
-      create: (context) => CounterBloc(),
+    return BlocProvider<CounterCubit>(
+      create: (context) => CounterCubit(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Counter App',
@@ -33,7 +33,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: BlocBuilder<CounterBloc, CounterState>(
+        child: BlocBuilder<CounterCubit, CounterState>(
           builder: (context, state) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -60,8 +60,10 @@ class MyHomePage extends StatelessWidget {
         children: [
           FloatingActionButton(
             onPressed: () {
-              BlocProvider.of<CounterBloc>(context).add(IncrementEvent());
+              // BlocProvider.of<CounterBloc>(context).add(IncrementEvent());
               // context.read<CounterBloc>().add(IncrementEvent());
+
+              BlocProvider.of<CounterCubit>(context).increment();
             },
             child: const Icon(Icons.add),
           ),
@@ -69,7 +71,8 @@ class MyHomePage extends StatelessWidget {
           FloatingActionButton(
             onPressed: () {
               // context.read<CounterBloc>().add(DecrementEvent());
-              BlocProvider.of<CounterBloc>(context).add(DecrementEvent());
+              // BlocProvider.of<CounterBloc>(context).add(DecrementEvent());
+              BlocProvider.of<CounterCubit>(context).decrement();
             },
             child: const Icon(Icons.remove),
           )
